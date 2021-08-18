@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace TollCalculator.API.Models
 {
-    internal class TollEntries
+    internal class TollEntry
     {
         [Required]
         internal Guid Id { get; set; }
