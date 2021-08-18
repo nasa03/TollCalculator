@@ -22,7 +22,7 @@ namespace TollCalculator.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Fee")
+                    b.Property<double?>("Fee")
                         .HasColumnType("REAL");
 
                     b.Property<string>("LicensePlate")

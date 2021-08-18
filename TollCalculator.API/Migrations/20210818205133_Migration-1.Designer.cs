@@ -9,7 +9,7 @@ using TollCalculator.API.Context;
 namespace TollCalculator.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210818203941_Migration-1")]
+    [Migration("20210818205133_Migration-1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace TollCalculator.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Fee")
+                    b.Property<double?>("Fee")
                         .HasColumnType("REAL");
 
                     b.Property<string>("LicensePlate")

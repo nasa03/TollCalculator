@@ -11,7 +11,6 @@ namespace TollCalculator.API.Models
         public string LicensePlate { get; set; }
         [Required]
         public DateTime TimeOfEntry { get; set; }
-        [Required]
-        public double Fee { get; set; }
+        public double? Fee { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TollCalculator.API.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     LicensePlate = table.Column<string>(type: "TEXT", nullable: false),
                     TimeOfEntry = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Fee = table.Column<double>(type: "REAL", nullable: false)
+                    Fee = table.Column<double>(type: "REAL", nullable: true)
                 },
                 constraints: table =>
                 {
