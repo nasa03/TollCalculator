@@ -5,12 +5,14 @@ namespace TollCalculator.API.Context
 {
     internal class ApplicationDbContext : DbContext
     {
-        internal ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            var builder = WebApplication.CreateBuilder();
+            var connectionString = builder.Configuration
+            .GetSection("ConnectionString")
+            .Value;
+            optionsBuilder.UseSqlite(connectionString);
         }
-
 
         internal DbSet<TollEntry> TollEntries { get; set; }
     }

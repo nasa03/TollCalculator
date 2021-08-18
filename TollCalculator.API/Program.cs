@@ -1,5 +1,6 @@
-using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.OpenApi.Models;
+using TollCalculator.API.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "TollCalculator.API", Version = "v1" });
 });
+builder.Services.AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
 
