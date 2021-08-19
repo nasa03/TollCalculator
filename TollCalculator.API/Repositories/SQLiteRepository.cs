@@ -8,7 +8,7 @@ namespace TollCalculator.API.Repositories
     {
         private readonly ApplicationDbContext _context;
 
-        internal SQLiteRepository(ApplicationDbContext context)
+        public SQLiteRepository(ApplicationDbContext context)
         {
             _context = context;
         }

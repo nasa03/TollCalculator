@@ -3,7 +3,7 @@ using TollCalculator.API.Models;
 
 namespace TollCalculator.API.Context
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

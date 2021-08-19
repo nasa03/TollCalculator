@@ -19,6 +19,7 @@ namespace TollCalculator.API.Controllers
             _repository = repository;
         }
 
+        [HttpPost]
         public IActionResult Reset()
         {
             var resetResult = _repository.DeleteAllEntries();
