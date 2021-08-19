@@ -3,7 +3,9 @@ namespace TollCalculator.API.Interfaces
 {
     public interface IRepository
     {
-        void PostTollEntry(TollEntry tollEntry);
+        bool PostTollEntry(TollEntry tollEntry);
+        bool PostTollEntry(IEnumerable<TollEntry> tollEntry);
         IQueryable<TollEntry> GetTollEntries(string licensePlate);
+        bool DeleteAllEntries();
     }
 }

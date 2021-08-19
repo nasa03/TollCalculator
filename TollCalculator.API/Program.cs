@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.OpenApi.Models;
+using TollCalculator.API.Builders;
 using TollCalculator.API.Context;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Repositories;
