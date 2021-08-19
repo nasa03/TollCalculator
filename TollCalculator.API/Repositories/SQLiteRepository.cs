@@ -5,7 +5,7 @@ namespace TollCalculator.API.Repositories
 {
     public class SQLiteRepository : IRepository
     {
-        public IQueryable<IEnumerable<TollEntry>> GetTollEntries(string licensePlate)
+        public IQueryable<TollEntry> GetTollEntries(string licensePlate)
         {
             throw new NotImplementedException();
         }
