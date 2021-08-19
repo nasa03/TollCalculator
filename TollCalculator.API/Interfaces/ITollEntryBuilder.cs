@@ -4,8 +4,8 @@ namespace TollCalculator.API.Interfaces
 {
     public interface ITollEntryBuilder : IBuilder<TollEntry>
     {
-        ITollEntryBuilder WithLicencePlate(string licensePlate);
-        ITollEntryBuilder EnteredBy(DateTime dateTime);
-        ITollEntryBuilder ForFeeOf(double fee);
+        TollEntry WithLicencePlate(string licensePlate);
+        TollEntry EnteredBy(DateTime dateTime);
+        TollEntry ForFeeOf(double fee);
     }
 }
