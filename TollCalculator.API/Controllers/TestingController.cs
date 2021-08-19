@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
 using TollCalculator.API.Repositories;
-
 namespace TollCalculator.API.Controllers
 {
     [ApiController]
@@ -17,6 +15,7 @@ namespace TollCalculator.API.Controllers
         };
         public TestingController(SQLiteRepository repository) =>
             _repository = repository;
+
 
     }
 }
