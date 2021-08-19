@@ -3,7 +3,7 @@ using TollCalculator.API.Models;
 
 namespace TollCalculator.API.Repositories
 {
-    internal class SQLiteRepository : IRepository
+    public class SQLiteRepository : IRepository
     {
         public IQueryable<IEnumerable<TollEntry>> GetTollEntries(string licensePlate)
         {
