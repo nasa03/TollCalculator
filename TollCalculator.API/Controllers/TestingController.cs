@@ -9,12 +9,10 @@ namespace TollCalculator.API.Controllers
     [Route("[Controller]")]
     public class TestingController : Controller
     {
-        private readonly SQLiteRepository _repository;
-        private readonly List<TollEntry> _fakeEntries = new List<TollEntry>
-        {
+        private readonly IRepository _repository;
+        private readonly List<TollEntry> _fakeEntries = new();
 
-        };
-        public TestingController(SQLiteRepository repository)
+        public TestingController(IRepository repository)
         {
             _repository = repository;
         }
@@ -26,7 +24,7 @@ namespace TollCalculator.API.Controllers
             if (!resetResult)
                 return NotFound();
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 10000; i++)
                 AddFakeEntry();
 
             var postResult = _repository.PostTollEntry(_fakeEntries);
@@ -65,21 +63,21 @@ namespace TollCalculator.API.Controllers
         {
             var allLettersAndnumbers = "abcdefghijklmnopqrstuvwxyzåäö0123456789";
             var rnd = new Random();
-            var licensePlate = new string[6];
+            var licensePlate = new char[6];
             for (var i = 0; i < licensePlate.Length; i++)
             {
                 var randomPosition = rnd.Next(0, allLettersAndnumbers.Length - 1);
                 var randomChar = allLettersAndnumbers[randomPosition];
-                licensePlate[i] = Convert.ToString(randomChar);
+                licensePlate[i] = randomChar;
             }
-            return Convert.ToString(licensePlate);
+            return new String(licensePlate);
         }
 
         private DateTime GetRandomDate()
         {
             var year = GetRandomInteger(2015, 2022);
             var month = GetRandomInteger(1, 13);
-            var day = GetRandomInteger(1, 32);
+            var day = GetRandomInteger(1, 29);
             var hour = GetRandomInteger(0, 24);
             var minute = GetRandomInteger(0, 60);
             var second = GetRandomInteger(0, 60);

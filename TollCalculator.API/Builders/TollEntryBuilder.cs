@@ -2,10 +2,10 @@ using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
 namespace TollCalculator.API.Builders
 {
-    internal class TollEntryBuilder : ITollEntryBuilder
+    public class TollEntryBuilder : ITollEntryBuilder
     {
         private TollEntry _tollEntry;
-        internal TollEntryBuilder() => _tollEntry = new TollEntry();
+        public TollEntryBuilder() => _tollEntry = new TollEntry();
         public TollEntry EnteredBy(DateTime dateTime)
         {
             _tollEntry.TimeOfEntry = dateTime;
