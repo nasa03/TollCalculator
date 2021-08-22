@@ -6,7 +6,7 @@ namespace TollCalculator.API.Builders
     {
         private TollEntry _tollEntry;
         public TollEntryBuilder() => _tollEntry = new TollEntry();
-        public TollEntry EnteredBy(DateTime dateTime)
+        public TollEntry EnteredByDate(DateTime dateTime)
         {
             _tollEntry.TimeOfEntry = dateTime;
             return _tollEntry;

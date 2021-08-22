@@ -7,12 +7,12 @@ namespace TollCalculator.API.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class TestingController : Controller
+    public class TesterController : Controller
     {
         private readonly IRepository _repository;
         private readonly List<TollEntry> _fakeEntries = new();
 
-        public TestingController(IRepository repository)
+        public TesterController(IRepository repository)
         {
             _repository = repository;
         }
@@ -40,12 +40,12 @@ namespace TollCalculator.API.Controllers
             var plate = GetRandomLicensePlate();
             var fee = GetRandomFee();
 
-            var builder = new TollEntryBuilder();
-            builder.WithLicencePlate(plate);
-            builder.EnteredBy(date);
-            builder.ForFeeOf(fee);
+            var entryBuilder = new TollEntryBuilder();
+            entryBuilder.WithLicencePlate(plate);
+            entryBuilder.EnteredByDate(date);
+            entryBuilder.ForFeeOf(fee);
 
-            var entry = builder.Build();
+            var entry = entryBuilder.Build();
             _fakeEntries.Add(entry);
         }
 
