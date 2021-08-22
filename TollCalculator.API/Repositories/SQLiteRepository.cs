@@ -15,7 +15,7 @@ namespace TollCalculator.API.Repositories
 
         public bool DeleteAllEntries()
         {
-            var all = _context.TollEntries.Where(t => true);
+            var all = _context.TollEntries.Where(entry => true);
             _context.RemoveRange(all);
             try
             {
