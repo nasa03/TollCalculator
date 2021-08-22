@@ -22,5 +22,10 @@ namespace TollCalculator.API.Builders
             return _tollEntry;
         }
         public TollEntry Build() => _tollEntry;
+
+        public TollEntry Reset()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

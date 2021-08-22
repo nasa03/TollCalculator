@@ -1,7 +1,8 @@
 namespace TollCalculator.API.Interfaces
 {
-    public interface IBuilder<T>
+    public interface IBuilder<T1, T2>
     {
-        T Build();
+        T1 Build();
+        T2 Reset();
     }
 }

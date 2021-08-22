@@ -13,10 +13,11 @@ namespace TollCalculator.API.Repositories
             _context = context;
         }
 
-        public bool DeleteAllEntries()
+        public bool DeleteAllVehicleTypes()
         {
-            var all = _context.TollEntries.Where(entry => true);
-            _context.RemoveRange(all);
+            var allVehicleTypes = _context.VehicleTypes
+                .Where(vt => true);
+            _context.VehicleTypes.RemoveRange(allVehicleTypes);
             try
             {
                 _context.SaveChanges();
@@ -28,26 +29,40 @@ namespace TollCalculator.API.Repositories
             }
         }
 
-        public IQueryable<TollEntry> GetTollEntries(string licensePlate)
+        public bool PostVehicleType(VehicleType vehicleType)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool PostTollEntry(TollEntry tollEntry)
-        {
-            throw new NotImplementedException();
-        }
-        public bool PostTollEntry(IEnumerable<TollEntry> tollEntry)
-        {
-            _context.TollEntries.AddRange(tollEntry);
+            _context.VehicleTypes.Add(vehicleType);
             try
             {
-                return _context.SaveChanges() > 0;
+                _context.SaveChanges();
+                return true;
             }
             catch
             {
                 return false;
             }
         }
+
+        // public IQueryable<TollEntry> GetTollEntries(string licensePlate)
+        // {
+        //     throw new NotImplementedException();
+        // }
+
+        // public bool PostTollEntry(TollEntry tollEntry)
+        // {
+        //     throw new NotImplementedException();
+        // }
+        // public bool PostTollEntry(IEnumerable<TollEntry> tollEntry)
+        // {
+        //     _context.TollEntries.AddRange(tollEntry);
+        //     try
+        //     {
+        //         return _context.SaveChanges() > 0;
+        //     }
+        //     catch
+        //     {
+        //         return false;
+        //     }
+        // }
     }
 }
