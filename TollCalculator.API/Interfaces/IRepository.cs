@@ -1,3 +1,4 @@
+using TollCalculator.API.GenericClasses;
 using TollCalculator.API.Models;
 namespace TollCalculator.API.Interfaces
 {
@@ -10,5 +11,7 @@ namespace TollCalculator.API.Interfaces
 
         bool DeleteAllVehicleTypes();
         bool PostVehicleType(T vehicleType);
+        Dto<T> GetVehicleTypeFromTollEligibility(bool isTollEligable);
+        bool PostLicensePlate(LicensePlate licensePlate);
     }
 }

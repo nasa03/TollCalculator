@@ -1,4 +1,5 @@
 using TollCalculator.API.Context;
+using TollCalculator.API.GenericClasses;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
 
@@ -29,6 +30,34 @@ namespace TollCalculator.API.Repositories
             }
         }
 
+        public Dto<VehicleType> GetVehicleTypeFromTollEligibility(bool isTollEligable)
+        {
+            var type = _context.VehicleTypes
+                .FirstOrDefault(vt => vt.IsTollEligable == isTollEligable);
+            if (type is null)
+                return new Dto<VehicleType> { Success = false };
+
+            return new Dto<VehicleType>
+            {
+                Payload = type,
+                Success = true
+            };
+        }
+
+        public bool PostLicensePlate(LicensePlate licensePlate)
+        {
+            _context.LicensePlates.Add(licensePlate);
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool PostVehicleType(VehicleType vehicleType)
         {
             _context.VehicleTypes.Add(vehicleType);
@@ -43,26 +72,5 @@ namespace TollCalculator.API.Repositories
             }
         }
 
-        // public IQueryable<TollEntry> GetTollEntries(string licensePlate)
-        // {
-        //     throw new NotImplementedException();
-        // }
-
-        // public bool PostTollEntry(TollEntry tollEntry)
-        // {
-        //     throw new NotImplementedException();
-        // }
-        // public bool PostTollEntry(IEnumerable<TollEntry> tollEntry)
-        // {
-        //     _context.TollEntries.AddRange(tollEntry);
-        //     try
-        //     {
-        //         return _context.SaveChanges() > 0;
-        //     }
-        //     catch
-        //     {
-        //         return false;
-        //     }
-        // }
     }
 }
