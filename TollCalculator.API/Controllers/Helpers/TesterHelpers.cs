@@ -39,8 +39,8 @@ namespace TollCalculator.API.Controllers.Helpers
         }
         private static DateTime GetRandomDate()
         {
-            var year = GetRandomInteger(2015, 2022);
-            var month = GetRandomInteger(1, 13);
+            var year = GetRandomInteger(2021, 2022);
+            var month = GetRandomInteger(1, 2);
             var day = GetRandomInteger(1, 29);
             var hour = GetRandomInteger(0, 24);
             var minute = GetRandomInteger(0, 60);
