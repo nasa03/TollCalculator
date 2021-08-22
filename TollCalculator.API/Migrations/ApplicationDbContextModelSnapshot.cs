@@ -64,7 +64,7 @@ namespace TollCalculator.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsTollFree")
+                    b.Property<bool>("IsTollEligable")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
