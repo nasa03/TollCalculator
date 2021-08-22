@@ -4,12 +4,7 @@ namespace TollCalculator.API.Controllers.Helpers
 {
     internal static class TesterHelpers
     {
-        internal static void AddFakeEntry(List<TollEntry> _fakeEntries)
-        {
-            var entry = BuildFakeEntry();
-            _fakeEntries.Add(entry);
-        }
-        private static TollEntry BuildFakeEntry()
+        internal static TollEntry GetFakeEntry()
         {
             var date = GetRandomDate();
             var plate = GetRandomLicensePlate();
