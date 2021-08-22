@@ -9,9 +9,9 @@ namespace TollCalculator.API.Controllers
     [Route("[Controller]")]
     public class TesterController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IRepository<VehicleType> _repository;
         private readonly List<TollEntry> _fakeEntries = new();
-        public TesterController(IRepository repository)
+        public TesterController(IRepository<VehicleType> repository)
         {
             _repository = repository;
         }

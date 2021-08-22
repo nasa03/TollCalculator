@@ -1,8 +1,8 @@
 namespace TollCalculator.API.Interfaces
 {
-    public interface IBuilder<T1, T2>
+    public interface IBuilder<BuildReturnType, ResetReturnType>
     {
-        T1 Build();
-        T2 Reset();
+        BuildReturnType Build();
+        ResetReturnType Reset();
     }
 }

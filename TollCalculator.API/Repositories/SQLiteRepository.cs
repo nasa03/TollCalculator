@@ -4,7 +4,7 @@ using TollCalculator.API.Models;
 
 namespace TollCalculator.API.Repositories
 {
-    public class SQLiteRepository : IRepository
+    public class SQLiteRepository : IRepository<VehicleType>
     {
         private readonly ApplicationDbContext _context;
 

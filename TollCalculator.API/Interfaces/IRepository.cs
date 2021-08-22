@@ -1,7 +1,7 @@
 using TollCalculator.API.Models;
 namespace TollCalculator.API.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<T>
     {
         // bool PostTollEntry(TollEntry tollEntry);
         // bool PostTollEntry(IEnumerable<TollEntry> tollEntry);
@@ -9,6 +9,6 @@ namespace TollCalculator.API.Interfaces
         // bool DeleteAllEntries();
 
         bool DeleteAllVehicleTypes();
-        bool PostVehicleType(VehicleType vehicleType);
+        bool PostVehicleType(T vehicleType);
     }
 }
