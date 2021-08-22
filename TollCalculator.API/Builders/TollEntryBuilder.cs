@@ -16,7 +16,7 @@ namespace TollCalculator.API.Builders
             _tollEntry.Fee = fee;
             return _tollEntry;
         }
-        public TollEntry WithLicencePlate(string licensePlate)
+        public TollEntry WithLicencePlate(LicensePlate licensePlate)
         {
             _tollEntry.LicensePlate = licensePlate;
             return _tollEntry;

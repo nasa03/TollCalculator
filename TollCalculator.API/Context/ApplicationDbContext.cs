@@ -15,5 +15,8 @@ namespace TollCalculator.API.Context
         }
 
         internal DbSet<TollEntry> TollEntries { get; set; }
+        internal DbSet<LicensePlate> LicensePlates { get; set; }
+        internal DbSet<VehicleType> VehicleTypes { get; set; }
+
     }
 }

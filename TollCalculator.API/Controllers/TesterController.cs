@@ -14,21 +14,22 @@ namespace TollCalculator.API.Controllers
         {
             _repository = repository;
         }
-        [HttpPost]
-        public IActionResult Reset()
-        {
-            var resetResult = _repository.DeleteAllEntries();
-            if (!resetResult)
-                return NotFound();
-            for (var i = 0; i < 10000; i++)
-            {
-                var entry = TesterHelpers.GetFakeEntry();
-                _fakeEntries.Add(entry);
-            }
-            var postResult = _repository.PostTollEntry(_fakeEntries);
-            if (!postResult)
-                return NotFound();
-            return Ok();
-        }
+
+        // [HttpPost]
+        // public IActionResult Reset()
+        // {
+        //     var resetResult = _repository.DeleteAllEntries();
+        //     if (!resetResult)
+        //         return NotFound();
+        //     for (var i = 0; i < 10000; i++)
+        //     {
+        //         var entry = TesterHelpers.GetFakeEntry();
+        //         _fakeEntries.Add(entry);
+        //     }
+        //     var postResult = _repository.PostTollEntry(_fakeEntries);
+        //     if (!postResult)
+        //         return NotFound();
+        //     return Ok();
+        // }
     }
 }
