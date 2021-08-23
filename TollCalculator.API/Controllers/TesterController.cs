@@ -20,10 +20,33 @@ namespace TollCalculator.API.Controllers
         public IActionResult Reset()
         {
             _repository.DeleteAllVehicleTypes();
-            var postVehicleTypeRes = PopulateDbWithVehicleTypes();
-            var postLicensePlateRes = PopulateDbWithLicensePlates();
+            _repository.DeleteAllLicensePlates();
+            _repository.DeleteAllTollEntries();
+
+            var postVehicleTypeResult = PopulateDbWithVehicleTypes();
+            var postLicensePlateResult = PopulateDbWithLicensePlates();
+            var postRandomEntriesResult = PopulateDbWithRandomEntries();
 
             return Ok();
+        }
+
+        private bool PopulateDbWithRandomEntries()
+        {
+            var postSuccess = true;
+            var licensePlates = _repository.GetAllLicensePlates();
+            foreach (var licensePlate in licensePlates)
+            {
+                for (var i = 0; i < 25; i++)
+                {
+                    var randomEntry = GetRandomEntry(licensePlate);
+                    _fakeEntries.Add(randomEntry);
+                }
+            }
+            var postResult = _repository.PostTollEntries(_fakeEntries);
+            if (!postResult)
+                postSuccess = false;
+
+            return postSuccess;
         }
 
         private bool PopulateDbWithLicensePlates()
@@ -37,7 +60,7 @@ namespace TollCalculator.API.Controllers
                 .GetVehicleType(false)
                 .Payload;
 
-            var postsucces = true;
+            var postSuccess = true;
             var plates = new[] { "ALEX5689", "HANS0045", "FRED1119", "ANDE3399" };
             for (var i = 0; i < 4; i++)
             {
@@ -53,10 +76,10 @@ namespace TollCalculator.API.Controllers
 
                 var postResult = _repository.PostLicensePlate(licenseplate);
                 if (!postResult)
-                    postsucces = false;
+                    postSuccess = false;
             }
 
-            return postsucces;
+            return postSuccess;
         }
 
         private bool PopulateDbWithVehicleTypes()
@@ -80,6 +103,21 @@ namespace TollCalculator.API.Controllers
                 postResult = false;
 
             return postResult;
+        }
+
+        private TollEntry GetRandomEntry(LicensePlate licensePlate)
+        {
+            var tollEntryBuilder = new TollEntryBuilder();
+            var date = TesterHelpers.GetRandomDate();
+            var fee = TesterHelpers.GetRandomFee();
+
+
+            return tollEntryBuilder
+                .Reset()
+                .EnteredByDate(date)
+                .WithLicencePlate(licensePlate)
+                .ForFeeOf(fee)
+                .Build();
         }
     }
 }

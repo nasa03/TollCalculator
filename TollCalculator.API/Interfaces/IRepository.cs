@@ -4,14 +4,17 @@ namespace TollCalculator.API.Interfaces
 {
     public interface IRepository<T>
     {
-        // bool PostTollEntry(TollEntry tollEntry);
-        // bool PostTollEntry(IEnumerable<TollEntry> tollEntry);
-        // IQueryable<TollEntry> GetTollEntries(string licensePlate);
-        // bool DeleteAllEntries();
-
-        bool DeleteAllVehicleTypes();
-        bool PostVehicleType(T vehicleType);
+        //Get
+        IEnumerable<LicensePlate> GetAllLicensePlates();
         Dto<T> GetVehicleType(bool isTollEligable);
+        //Post
+        bool PostVehicleType(T vehicleType);
         bool PostLicensePlate(LicensePlate licensePlate);
+        bool PostTollEntry(TollEntry tollEntry);
+        bool PostTollEntries(List<TollEntry> _fakeEntries);
+        //Delete
+        bool DeleteAllVehicleTypes();
+        bool DeleteAllLicensePlates();
+        bool DeleteAllTollEntries();
     }
 }

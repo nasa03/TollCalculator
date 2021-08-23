@@ -14,6 +14,36 @@ namespace TollCalculator.API.Repositories
             _context = context;
         }
 
+        public bool DeleteAllLicensePlates()
+        {
+            var all = _context.LicensePlates.Where(lp => true);
+            _context.LicensePlates.RemoveRange(all);
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteAllTollEntries()
+        {
+            var all = _context.TollEntries.Where(te => true);
+            _context.TollEntries.RemoveRange(all);
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool DeleteAllVehicleTypes()
         {
             var allVehicleTypes = _context.VehicleTypes
@@ -28,6 +58,11 @@ namespace TollCalculator.API.Repositories
             {
                 return false;
             }
+        }
+
+        public IEnumerable<LicensePlate> GetAllLicensePlates()
+        {
+            return _context.LicensePlates.Where(lp => true);
         }
 
         public Dto<VehicleType> GetVehicleType(bool isTollEligable)
@@ -47,6 +82,34 @@ namespace TollCalculator.API.Repositories
         public bool PostLicensePlate(LicensePlate licensePlate)
         {
             _context.LicensePlates.Add(licensePlate);
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool PostTollEntries(List<TollEntry> _fakeEntries)
+        {
+            _context.AddRange(_fakeEntries);
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool PostTollEntry(TollEntry tollEntry)
+        {
+            _context.TollEntries.Add(tollEntry);
             try
             {
                 _context.SaveChanges();
