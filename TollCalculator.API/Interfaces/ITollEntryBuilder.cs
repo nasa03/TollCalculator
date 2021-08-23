@@ -2,10 +2,10 @@ using TollCalculator.API.Models;
 
 namespace TollCalculator.API.Interfaces
 {
-    public interface ITollEntryBuilder : IBuilder<TollEntry, TollEntry>
+    public interface ITollEntryBuilder : IBuilder<TollEntry, ITollEntryBuilder>
     {
-        TollEntry WithLicencePlate(LicensePlate licensePlate);
-        TollEntry EnteredByDate(DateTime dateTime);
-        TollEntry ForFeeOf(double fee);
+        ITollEntryBuilder WithLicencePlate(LicensePlate licensePlate);
+        ITollEntryBuilder EnteredByDate(DateTime dateTime);
+        ITollEntryBuilder ForFeeOf(double fee);
     }
 }
