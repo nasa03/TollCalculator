@@ -6,7 +6,7 @@ namespace TollCalculator.API.Builders
     internal sealed class VehicleTypeBuilder : IVehicleTypeBuilder
     {
         internal static bool? _isTollEligable;
-        public IVehicleTypeBuilder SetTollEligibilityTo(bool isTollEligable)
+        public IVehicleTypeBuilder IsTollEligable(bool isTollEligable)
         {
             _isTollEligable = isTollEligable;
             return this;
@@ -17,7 +17,7 @@ namespace TollCalculator.API.Builders
             {
                 var message = $"'{nameof(VehicleType.IsTollEligable)}' hasn't been set yet.'"
                 + Environment.NewLine +
-                $"Please call '{nameof(SetTollEligibilityTo)}' to assign a value to this property.";
+                $"Please call '{nameof(IsTollEligable)}' to assign a value to this property.";
 
                 throw new ArgumentNullException(message);
             }

@@ -11,7 +11,7 @@ namespace TollCalculator.API.Interfaces
 
         bool DeleteAllVehicleTypes();
         bool PostVehicleType(T vehicleType);
-        Dto<T> GetVehicleTypeFromTollEligibility(bool isTollEligable);
+        Dto<T> GetVehicleType(bool isTollEligable);
         bool PostLicensePlate(LicensePlate licensePlate);
     }
 }

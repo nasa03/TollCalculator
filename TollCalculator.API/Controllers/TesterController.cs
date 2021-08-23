@@ -20,57 +20,66 @@ namespace TollCalculator.API.Controllers
         public IActionResult Reset()
         {
             _repository.DeleteAllVehicleTypes();
+            var postVehicleTypeRes = PopulateDbWithVehicleTypes();
+            var postLicensePlateRes = PopulateDbWithLicensePlates();
 
+            return Ok();
+        }
+
+        private bool PopulateDbWithLicensePlates()
+        {
+            var licensePlateBuilder = new LicensePlateBuilder();
+
+            var tollFree = _repository
+                .GetVehicleType(true)
+                .Payload;
+            var tollEligable = _repository
+                .GetVehicleType(false)
+                .Payload;
+
+            var postsucces = true;
+            var plates = new[] { "ALEX5689", "HANS0045", "FRED1119", "ANDE3399" };
+            for (var i = 0; i < 4; i++)
+            {
+                var tollEligibility = tollFree;
+                if (i > 1)
+                    tollEligibility = tollEligable;
+
+                var licenseplate = licensePlateBuilder
+                .Reset()
+                .ForVehicleType(tollEligibility)
+                .WithNumber(plates[i])
+                .Build();
+
+                var postResult = _repository.PostLicensePlate(licenseplate);
+                if (!postResult)
+                    postsucces = false;
+            }
+
+            return postsucces;
+        }
+
+        private bool PopulateDbWithVehicleTypes()
+        {
             var vehicleTypeBuilder = new VehicleTypeBuilder();
             var tollFreeType = vehicleTypeBuilder
                 .Reset()
-                .SetTollEligibilityTo(false)
+                .IsTollEligable(false)
                 .Build();
 
             var tollEligableType = vehicleTypeBuilder
                 .Reset()
-                .SetTollEligibilityTo(true)
+                .IsTollEligable(true)
                 .Build();
 
-            _repository.PostVehicleType(tollFreeType);
-            _repository.PostVehicleType(tollEligableType);
+            var postResult = true;
+            var postResult1 = _repository.PostVehicleType(tollFreeType);
+            var postResult2 = _repository.PostVehicleType(tollEligableType);
 
-            var licensePlateBuilder = new LicensePlateBuilder();
+            if (!postResult1 || !postResult2)
+                postResult = false;
 
-            var tollFree = _repository
-                .GetVehicleTypeFromTollEligibility(true)
-                .Payload;
-            var tollEligable = _repository
-                .GetVehicleTypeFromTollEligibility(false)
-                .Payload;
-
-            var licenseplate1 = licensePlateBuilder
-                .Reset()
-                .ForVehicleType(tollFree)
-                .WithNumber("ALEX5689")
-                .Build();
-            var licenseplate2 = licensePlateBuilder
-                .Reset()
-                .ForVehicleType(tollFree)
-                .WithNumber("HANS0045")
-                .Build();
-            var licenseplate3 = licensePlateBuilder
-                .Reset()
-                .ForVehicleType(tollEligable)
-                .WithNumber("FRED1119")
-                .Build();
-            var licenseplate4 = licensePlateBuilder
-                .Reset()
-                .ForVehicleType(tollEligable)
-                .WithNumber("ANDE3399")
-                .Build();
-
-            _repository.PostLicensePlate(licenseplate1);
-            _repository.PostLicensePlate(licenseplate2);
-            _repository.PostLicensePlate(licenseplate3);
-            _repository.PostLicensePlate(licenseplate4);
-
-            return Ok();
+            return postResult;
         }
     }
 }

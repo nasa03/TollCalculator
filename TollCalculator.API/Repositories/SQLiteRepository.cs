@@ -30,7 +30,7 @@ namespace TollCalculator.API.Repositories
             }
         }
 
-        public Dto<VehicleType> GetVehicleTypeFromTollEligibility(bool isTollEligable)
+        public Dto<VehicleType> GetVehicleType(bool isTollEligable)
         {
             var type = _context.VehicleTypes
                 .FirstOrDefault(vt => vt.IsTollEligable == isTollEligable);

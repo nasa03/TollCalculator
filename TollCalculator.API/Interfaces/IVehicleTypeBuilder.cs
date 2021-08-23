@@ -4,6 +4,6 @@ namespace TollCalculator.API.Interfaces
 {
     public interface IVehicleTypeBuilder : IBuilder<VehicleType, IVehicleTypeBuilder>
     {
-        IVehicleTypeBuilder SetTollEligibilityTo(bool isEligable);
+        IVehicleTypeBuilder IsTollEligable(bool isEligable);
     }
 }
