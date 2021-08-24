@@ -9,9 +9,9 @@ namespace TollCalculator.API.Controllers
     [Route("[Controller]")]
     public class TesterController : Controller
     {
-        private readonly IRepository<VehicleType> _repository;
+        private readonly IRepository _repository;
         private readonly List<TollEntry> _fakeEntries = new();
-        public TesterController(IRepository<VehicleType> repository)
+        public TesterController(IRepository repository)
         {
             _repository = repository;
         }
@@ -19,13 +19,19 @@ namespace TollCalculator.API.Controllers
         [HttpPost]
         public IActionResult Reset()
         {
-            _repository.DeleteAllVehicleTypes();
-            _repository.DeleteAllLicensePlates();
-            _repository.DeleteAllTollEntries();
+            var deleteTollEntriesResult = _repository.DeleteAllTollEntries();
+            var deleteLicensePlatesResult = _repository.DeleteAllLicensePlates();
+            var deleteVehicleTypeResult = _repository.DeleteAllVehicleTypes();
+
+            if (!deleteVehicleTypeResult || !deleteLicensePlatesResult || !deleteTollEntriesResult)
+                return NotFound();
 
             var postVehicleTypeResult = PopulateDbWithVehicleTypes();
             var postLicensePlateResult = PopulateDbWithLicensePlates();
             var postRandomEntriesResult = PopulateDbWithRandomEntries();
+
+            if (!postVehicleTypeResult || !postLicensePlateResult || !postRandomEntriesResult)
+                return StatusCode(406);
 
             return Ok();
         }
