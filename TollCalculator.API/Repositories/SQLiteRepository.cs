@@ -69,10 +69,10 @@ namespace TollCalculator.API.Repositories
             return _context.LicensePlates.Where(lp => true);
         }
 
-        public Dto<VehicleType> GetVehicleType(bool isTollEligable)
+        public Dto<VehicleType> GetVehicleType(bool isTollEligible)
         {
             var type = _context.VehicleTypes
-                .FirstOrDefault(vt => vt.IsTollEligable == isTollEligable);
+                .FirstOrDefault(vt => vt.IsTollEligible == isTollEligible);
             if (type is null)
                 return new Dto<VehicleType> { Success = false };
 

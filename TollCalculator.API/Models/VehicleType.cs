@@ -10,7 +10,7 @@ namespace TollCalculator.API.Models
         public Guid Id { get; set; }
 
         [Required]
-        public bool IsTollEligable { get; set; }
+        public bool IsTollEligible { get; set; }
 
         public virtual ICollection<LicensePlate> LicensePlates { get; set; }
     }

@@ -12,7 +12,7 @@ namespace TollCalculator.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    IsTollEligable = table.Column<bool>(type: "INTEGER", nullable: false)
+                    IsTollEligible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

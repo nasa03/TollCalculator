@@ -6,26 +6,26 @@ namespace TollCalculator.API.Builders
 {
     internal sealed class VehicleTypeBuilder : IVehicleTypeBuilder
     {
-        private static bool? _isTollEligable;
-        public IVehicleTypeBuilder IsTollEligable(bool isTollEligable)
+        private static bool? _isTollEligible;
+        public IVehicleTypeBuilder IsTollEligible(bool isTollEligible)
         {
-            _isTollEligable = isTollEligable;
+            _isTollEligible = isTollEligible;
             return this;
         }
         public VehicleType Build()
         {
-            if (_isTollEligable is null)
+            if (_isTollEligible is null)
             {
-                var message = $"'{nameof(VehicleType.IsTollEligable)}' hasn't been set yet.'"
+                var message = $"'{nameof(VehicleType.IsTollEligible)}' hasn't been set yet.'"
                 + Environment.NewLine +
-                $"Please call '{nameof(IsTollEligable)}' to assign a value to this property.";
+                $"Please call '{nameof(IsTollEligible)}' to assign a value to this property.";
 
                 throw new ArgumentNullException(message);
             }
             var vehicleType = new VehicleType
             {
                 Id = new Guid(),
-                IsTollEligable = Convert.ToBoolean(_isTollEligable)
+                IsTollEligible = Convert.ToBoolean(_isTollEligible)
             };
 
             return vehicleType;
@@ -33,7 +33,7 @@ namespace TollCalculator.API.Builders
 
         public IVehicleTypeBuilder Reset()
         {
-            _isTollEligable = null;
+            _isTollEligible = null;
             return this;
         }
     }

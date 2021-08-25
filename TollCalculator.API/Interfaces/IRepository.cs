@@ -7,7 +7,7 @@ namespace TollCalculator.API.Interfaces
     {
         //Get
         IEnumerable<LicensePlate> GetAllLicensePlates();
-        Dto<VehicleType> GetVehicleType(bool isTollEligable);
+        Dto<VehicleType> GetVehicleType(bool isTollEligible);
         //Post
         bool PostVehicleType(VehicleType vehicleType);
         bool PostLicensePlate(LicensePlate licensePlate);

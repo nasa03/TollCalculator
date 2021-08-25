@@ -73,7 +73,7 @@ namespace TollCalculator.API.Controllers
             var tollFree = _repository
                 .GetVehicleType(true)
                 .Payload;
-            var tollEligable = _repository
+            var tollEligible = _repository
                 .GetVehicleType(false)
                 .Payload;
 
@@ -83,15 +83,15 @@ namespace TollCalculator.API.Controllers
             {
                 var tollEligibility = tollFree;
                 if (i > 1)
-                    tollEligibility = tollEligable;
+                    tollEligibility = tollEligible;
 
-                var licenseplate = licensePlateBuilder
+                var licensePlate = licensePlateBuilder
                     .Reset()
                     .ForVehicleType(tollEligibility)
                     .WithNumber(plates[i])
                     .Build();
 
-                var postResult = _repository.PostLicensePlate(licenseplate);
+                var postResult = _repository.PostLicensePlate(licensePlate);
                 if (!postResult)
                     postSuccess = false;
             }
@@ -104,17 +104,17 @@ namespace TollCalculator.API.Controllers
             var vehicleTypeBuilder = new VehicleTypeBuilder();
             var tollFreeType = vehicleTypeBuilder
                 .Reset()
-                .IsTollEligable(false)
+                .IsTollEligible(false)
                 .Build();
 
-            var tollEligableType = vehicleTypeBuilder
+            var tollEligibleType = vehicleTypeBuilder
                 .Reset()
-                .IsTollEligable(true)
+                .IsTollEligible(true)
                 .Build();
 
             var postResult = true;
             var postResult1 = _repository.PostVehicleType(tollFreeType);
-            var postResult2 = _repository.PostVehicleType(tollEligableType);
+            var postResult2 = _repository.PostVehicleType(tollEligibleType);
 
             if (!postResult1 || !postResult2)
                 postResult = false;
@@ -122,7 +122,7 @@ namespace TollCalculator.API.Controllers
             return postResult;
         }
 
-        private TollEntry GetRandomEntry(LicensePlate licensePlate)
+        private static TollEntry GetRandomEntry(LicensePlate licensePlate)
         {
             var tollEntryBuilder = new TollEntryBuilder();
             var date = TesterHelpers.GetRandomDate();
