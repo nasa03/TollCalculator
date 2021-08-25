@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using TollCalculator.API.Builders;
 using TollCalculator.API.Controllers.Helpers;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
+
 namespace TollCalculator.API.Controllers
 {
     [ApiController]
@@ -13,18 +15,17 @@ namespace TollCalculator.API.Controllers
     {
         private readonly IRepository _repository;
         private readonly List<TollEntry> _fakeEntries = new();
+
         public TesterController(IRepository repository)
         {
             _repository = repository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Reset()
+        public async Task<IActionResult> ResetAsync()
         {
-            var task = new Task<IActionResult>(() =>
+            var resetDelegate = new Func<IActionResult>(() =>
             {
-
-
                 var deleteTollEntriesResult = _repository.DeleteAllTollEntries();
                 var deleteLicensePlatesResult = _repository.DeleteAllLicensePlates();
                 var deleteVehicleTypeResult = _repository.DeleteAllVehicleTypes();
@@ -42,9 +43,7 @@ namespace TollCalculator.API.Controllers
                 return Ok();
             });
 
-            task.Start();
-            return await task;
-
+            return await Task.FromResult(resetDelegate.Invoke());
         }
 
         private bool PopulateDbWithRandomEntries()
@@ -59,6 +58,7 @@ namespace TollCalculator.API.Controllers
                     _fakeEntries.Add(randomEntry);
                 }
             }
+
             var postResult = _repository.PostTollEntries(_fakeEntries);
             if (!postResult)
                 postSuccess = false;
@@ -86,10 +86,10 @@ namespace TollCalculator.API.Controllers
                     tollEligibility = tollEligable;
 
                 var licenseplate = licensePlateBuilder
-                .Reset()
-                .ForVehicleType(tollEligibility)
-                .WithNumber(plates[i])
-                .Build();
+                    .Reset()
+                    .ForVehicleType(tollEligibility)
+                    .WithNumber(plates[i])
+                    .Build();
 
                 var postResult = _repository.PostLicensePlate(licenseplate);
                 if (!postResult)
