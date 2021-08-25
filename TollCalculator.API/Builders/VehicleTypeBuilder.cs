@@ -1,3 +1,4 @@
+using System;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
 
@@ -5,7 +6,7 @@ namespace TollCalculator.API.Builders
 {
     internal sealed class VehicleTypeBuilder : IVehicleTypeBuilder
     {
-        internal static bool? _isTollEligable;
+        private static bool? _isTollEligable;
         public IVehicleTypeBuilder IsTollEligable(bool isTollEligable)
         {
             _isTollEligable = isTollEligable;

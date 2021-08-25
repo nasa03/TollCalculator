@@ -1,15 +1,18 @@
+using System;
+using System.Collections.Generic;
 using TollCalculator.API.Context;
 using TollCalculator.API.GenericClasses;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Models;
+using System.Linq;
 
 namespace TollCalculator.API.Repositories
 {
-    public class SQLiteRepository : IRepository
+    public class SqLiteRepository : IRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public SQLiteRepository(ApplicationDbContext context)
+        public SqLiteRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -94,9 +97,9 @@ namespace TollCalculator.API.Repositories
             }
         }
 
-        public bool PostTollEntries(List<TollEntry> _fakeEntries)
+        public bool PostTollEntries(List<TollEntry> fakeEntries)
         {
-            _context.AddRange(_fakeEntries);
+            _context.AddRange(fakeEntries);
             try
             {
                 _context.SaveChanges();

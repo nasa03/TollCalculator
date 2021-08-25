@@ -1,3 +1,4 @@
+using System;
 using TollCalculator.API.Models;
 
 namespace TollCalculator.API.Interfaces

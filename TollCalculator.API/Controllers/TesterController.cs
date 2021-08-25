@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TollCalculator.API.Builders;
 using TollCalculator.API.Controllers.Helpers;
@@ -17,23 +19,32 @@ namespace TollCalculator.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Reset()
+        public async Task<IActionResult> Reset()
         {
-            var deleteTollEntriesResult = _repository.DeleteAllTollEntries();
-            var deleteLicensePlatesResult = _repository.DeleteAllLicensePlates();
-            var deleteVehicleTypeResult = _repository.DeleteAllVehicleTypes();
+            var task = new Task<IActionResult>(() =>
+            {
 
-            if (!deleteVehicleTypeResult || !deleteLicensePlatesResult || !deleteTollEntriesResult)
-                return NotFound();
 
-            var postVehicleTypeResult = PopulateDbWithVehicleTypes();
-            var postLicensePlateResult = PopulateDbWithLicensePlates();
-            var postRandomEntriesResult = PopulateDbWithRandomEntries();
+                var deleteTollEntriesResult = _repository.DeleteAllTollEntries();
+                var deleteLicensePlatesResult = _repository.DeleteAllLicensePlates();
+                var deleteVehicleTypeResult = _repository.DeleteAllVehicleTypes();
 
-            if (!postVehicleTypeResult || !postLicensePlateResult || !postRandomEntriesResult)
-                return StatusCode(406);
+                if (!deleteVehicleTypeResult || !deleteLicensePlatesResult || !deleteTollEntriesResult)
+                    return NotFound();
 
-            return Ok();
+                var postVehicleTypeResult = PopulateDbWithVehicleTypes();
+                var postLicensePlateResult = PopulateDbWithLicensePlates();
+                var postRandomEntriesResult = PopulateDbWithRandomEntries();
+
+                if (!postVehicleTypeResult || !postLicensePlateResult || !postRandomEntriesResult)
+                    return StatusCode(406);
+
+                return Ok();
+            });
+
+            task.Start();
+            return await task;
+
         }
 
         private bool PopulateDbWithRandomEntries()

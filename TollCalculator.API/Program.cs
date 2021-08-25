@@ -1,9 +1,8 @@
-using Microsoft.EntityFrameworkCore.Sqlite;
-using Microsoft.OpenApi.Models;
-using TollCalculator.API.Builders;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TollCalculator.API.Context;
 using TollCalculator.API.Interfaces;
-using TollCalculator.API.Models;
 using TollCalculator.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +15,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "TollCalculator.API", Version = "v1" });
 });
 builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddTransient<IRepository, SQLiteRepository>();
+builder.Services.AddTransient<IRepository, SqLiteRepository>();
 
 var app = builder.Build();
 

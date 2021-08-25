@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TollCalculator.API.GenericClasses;
 using TollCalculator.API.Models;
 namespace TollCalculator.API.Interfaces
@@ -11,7 +12,7 @@ namespace TollCalculator.API.Interfaces
         bool PostVehicleType(VehicleType vehicleType);
         bool PostLicensePlate(LicensePlate licensePlate);
         bool PostTollEntry(TollEntry tollEntry);
-        bool PostTollEntries(List<TollEntry> _fakeEntries);
+        bool PostTollEntries(List<TollEntry> fakeEntries);
         //Delete
         bool DeleteAllVehicleTypes();
         bool DeleteAllLicensePlates();
