@@ -11,17 +11,17 @@ namespace TollCalculator.API.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class TesterController : Controller
+    public class TestController : Controller
     {
         private readonly IRepository _repository;
         private readonly List<TollEntry> _fakeEntries = new();
 
-        public TesterController(IRepository repository)
+        public TestController(IRepository repository)
         {
             _repository = repository;
         }
 
-        [HttpPost]
+        [HttpPost("Reset")]
         public async Task<IActionResult> ResetAsync()
         {
             var resetDelegate = new Func<IActionResult>(() =>

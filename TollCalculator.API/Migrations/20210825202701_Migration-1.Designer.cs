@@ -9,7 +9,7 @@ using TollCalculator.API.Context;
 namespace TollCalculator.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210822214159_Migration-1")]
+    [Migration("20210825202701_Migration-1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
