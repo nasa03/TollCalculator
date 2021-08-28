@@ -10,7 +10,7 @@ using TollCalculator.API.Models;
 namespace TollCalculator.API.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/test")]
     public class TestController : Controller
     {
         private readonly IRepository _repository;
@@ -21,7 +21,7 @@ namespace TollCalculator.API.Controllers
             _repository = repository;
         }
 
-        [HttpPost("Reset")]
+        [HttpPost("reset")]
         public async Task<IActionResult> ResetAsync()
         {
             var resetDelegate = new Func<IActionResult>(() =>

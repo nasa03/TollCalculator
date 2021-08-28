@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TollCalculator.API.Context;
 using TollCalculator.API.Interfaces;
 using TollCalculator.API.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
