@@ -11,7 +11,8 @@ namespace TollCalculator.API.Migrations
                 name: "VehicleTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     IsTollEligible = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -25,7 +26,7 @@ namespace TollCalculator.API.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Number = table.Column<string>(type: "TEXT", nullable: false),
-                    VehicleTypeId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    VehicleTypeId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

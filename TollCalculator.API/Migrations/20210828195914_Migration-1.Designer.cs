@@ -9,14 +9,14 @@ using TollCalculator.API.Context;
 namespace TollCalculator.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210825202701_Migration-1")]
+    [Migration("20210828195914_Migration-1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.9");
+                .HasAnnotation("ProductVersion", "6.0.0-preview.7.21378.4");
 
             modelBuilder.Entity("TollCalculator.API.Models.LicensePlate", b =>
                 {
@@ -28,8 +28,8 @@ namespace TollCalculator.API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("VehicleTypeId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("VehicleTypeId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -62,9 +62,9 @@ namespace TollCalculator.API.Migrations
 
             modelBuilder.Entity("TollCalculator.API.Models.VehicleType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsTollEligible")
                         .HasColumnType("INTEGER");

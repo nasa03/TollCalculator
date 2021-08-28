@@ -7,7 +7,7 @@ namespace TollCalculator.API.Models
     public class VehicleType
     {
         [Required]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public bool IsTollEligible { get; set; }

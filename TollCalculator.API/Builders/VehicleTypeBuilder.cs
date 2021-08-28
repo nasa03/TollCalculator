@@ -7,9 +7,15 @@ namespace TollCalculator.API.Builders
     internal sealed class VehicleTypeBuilder : IVehicleTypeBuilder
     {
         private static bool? _isTollEligible;
+        private static int? _id;
         public IVehicleTypeBuilder IsTollEligible(bool isTollEligible)
         {
             _isTollEligible = isTollEligible;
+            return this;
+        }
+        public IVehicleTypeBuilder WithId(int id)
+        {
+            _id = id;
             return this;
         }
         public VehicleType Build()
@@ -24,7 +30,7 @@ namespace TollCalculator.API.Builders
             }
             var vehicleType = new VehicleType
             {
-                Id = new Guid(),
+                Id = Convert.ToInt32(_id),
                 IsTollEligible = Convert.ToBoolean(_isTollEligible)
             };
 
@@ -34,7 +40,9 @@ namespace TollCalculator.API.Builders
         public IVehicleTypeBuilder Reset()
         {
             _isTollEligible = null;
+            _id = null;
             return this;
         }
+
     }
 }

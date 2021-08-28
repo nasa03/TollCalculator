@@ -105,11 +105,13 @@ namespace TollCalculator.API.Controllers
             var tollFreeType = vehicleTypeBuilder
                 .Reset()
                 .IsTollEligible(false)
+                .WithId(1)
                 .Build();
 
             var tollEligibleType = vehicleTypeBuilder
                 .Reset()
                 .IsTollEligible(true)
+                .WithId(2)
                 .Build();
 
             var postResult = true;
