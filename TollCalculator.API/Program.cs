@@ -14,7 +14,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "TollCalculator.API", Version = "v1" });
 });
-builder.Services.AddDbContext<ApplicationDbContext>();
+
+var connectionString = builder.Configuration["ConnectionString"];
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddTransient<IRepository, SqLiteRepository>();
 
 var app = builder.Build();
